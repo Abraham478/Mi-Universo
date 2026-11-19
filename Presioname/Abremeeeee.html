@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siempre Tú ❤️ | Nuestro Universo</title>
+    <!-- Fuentes de Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- MÚSICA DE FONDO -->
+    <audio id="musica" loop src="musica.mp3"></audio>
+    <button id="btnMusica" onclick="toggleMusica()" class="btn-musica">🎵</button>
+
+    <!-- LIENZO INTERACTIVO DE ALTO RENDIMIENTO -->
+    <canvas id="espacio"></canvas>
+
+    <!-- PORTADA -->
+    <section id="portada" class="inicio">
+        <div class="contenido glass">
+            <h1 class="titulo-script">Nuestro Universo ❤️</h1>
+<p class="frase">
+    Hay encuentros que parecen coincidencias...
+</p>
+
+<p class="frase2">
+    pero hay personas que llegan para cambiar por completo tu universo.
+</p>
+
+<p class="frase2">
+    Tú fuiste esa persona para mí. ❤️
+</p>
+            
+            <button class="btn-principal" onclick="iniciarViaje()">
+                <span> Iniciar nuestro viaje</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- SECCIÓN SOBRE 3D Y CARTA -->
+    <section id="carta" class="seccion oculto">
+        <div class="envelope-wrapper">
+            <div class="envelope" id="sobre3d">
+                <!-- Solapa superior que se abre -->
+                <div class="flap top-flap"></div>
+                
+                <!-- Solapas frontales del sobre -->
+                <div class="flap left-flap"></div>
+                <div class="flap right-flap"></div>
+                <div class="flap bottom-flap"></div>
+
+                <!-- Sello de corazón decorativo -->
+                <div class="heart-seal">💖</div>
+            </div>
+        </div>
+
+        <div class="letter glass glow">
+
+    <button class="btn-cerrar-carta" onclick="cerrarCarta()">&times;</button>
+
+    <h2 class="titulo-script">Antes de conocerte ❤️</h2>
+
+    <p>
+        Antes de que llegaras a mi vida, los días simplemente pasaban. Vivía siguiendo la rutina,
+        sin imaginar que todavía me faltaba conocer a la persona que cambiaría por completo mi
+        manera de ver el mundo.
+    </p>
+
+    <p>
+        Entonces apareciste tú. Quizá para ti fue un momento cualquiera, una conversación más o
+        un simple gesto, pero para mí fue el comienzo de algo que jamás habría imaginado. Sin darme
+        cuenta, empezaste a darle un nuevo sentido a mis días.
+    </p>
+
+    <p>
+        De pronto esperaba con emoción el momento de verte, sonreía al escuchar la notificación
+        de un mensaje tuyo y los minutos a tu lado se convirtieron en los mejores de cada día.
+        Lo que antes era un día común, contigo empezó a sentirse especial.
+    </p>
+
+    <p>
+        Poco a poco te convertiste en mi pensamiento favorito al despertar, en la persona con la
+        que quería compartir cada alegría, cada problema y cada pequeño momento. Sin buscarlo,
+        te convertiste en mi lugar seguro.
+    </p>
+
+    <p>
+        Fue entonces cuando entendí que ya no esperaba que terminara el día... esperaba con ilusión
+        que llegara el siguiente, porque significaba una nueva oportunidad para verte, abrazarte,
+        hablar contigo y seguir escribiendo nuestra historia.
+    </p>
+
+    <p>
+        Y desde ese momento comprendí que la vida, sin ti, ya no sería la misma.
+    </p>
+
+    <h2 class="titulo-script">Cuando te conocí ❤️</h2>
+
+    <p>
+        Lo curioso es que nuestras historias ya se habían cruzado antes. Habíamos coincidido,
+        convivíamos con las mismas personas e incluso compartíamos momentos sin imaginar que
+        el destino estaba preparando algo mucho más grande para nosotros.
+    </p>
+
+    <p>
+        Pero hubo un instante en el que todo cambió. Sin darme cuenta, comenzaba a distraerme
+        cada vez que te veía. Buscaba cualquier excusa para hablar contigo, para conocerte un
+        poco más y descubrir quién eras realmente.
+    </p>
+
+    <p>
+        Al principio no entendía lo que estaba sintiendo. Solo sabía que había algo en ti que
+        hacía que mi corazón se sintiera diferente. Con el paso del tiempo ese sentimiento fue
+        creciendo poco a poco, hasta que empecé a enamorarme de cada detalle: de tu sonrisa,
+        de tu forma de ser, de la tranquilidad que me transmitías y de la felicidad que aparecía
+        cada vez que estabas cerca.
+    </p>
+
+    <p>
+        Sin siquiera notarlo, te convertiste en la persona más importante de mis días. La persona
+        que logró hacerme creer otra vez en las casualidades bonitas, en los sueños y en el amor.
+    </p>
+
+    <p>
+        Hoy miro hacia atrás y pienso que aquel momento en el que realmente te conocí fue uno de
+        los más importantes de mi vida. Porque sin saberlo, ese día conocí a la mujer que terminaría
+        robándose mi corazón y convirtiéndose en el amor de mi vida.
+    </p>
+
+    <p>
+        Y si pudiera volver a vivir ese instante una y otra vez, lo haría con la misma ilusión...
+        porque siempre volvería a elegir encontrarte a ti. ❤️
+    </p>
+
+</div>
+    </section>
+
+    <!-- CONTADOR DE TIEMPO JUNTOS -->
+    <section class="seccion-reloj revelable">
+        <h2 class="titulo-script">Nuestro tiempo juntos ✨</h2>
+        <p class="sub-texto">Cada segundo a tu lado es un regalo...</p>
+        
+        <div class="contador-container glass glow">
+            <div class="caja-tiempo"><span id="dias">00</span><small>Días</small></div>
+            <div class="caja-tiempo"><span id="horas">00</span><small>Horas</small></div>
+            <div class="caja-tiempo"><span id="minutos">00</span><small>Minutos</small></div>
+            <div class="caja-tiempo"><span id="segundos">00</span><small>Segundos</small></div>
+        </div>
+    </section>
+
+    <!-- FOTO DESTACADA -->
+    <section class="foto-seccion revelable">
+        <div class="marco-foto">
+            <img src="foto.jpeg" alt="Nuestro Recuerdo Especial">
+        </div>
+        <h2 class="frase-destacada">"Mi lugar favorito en el mundo siempre será a tu lado."</h2>
+    </section>
+
+    <!-- GALERÍA TIPO PLANETARIO / CONSTELACIÓN -->
+<section class="seccion galeria-estelar">
+    <h1 class="titulo-script">Nuestra Constelación</h1>
+    <p class="sub-texto">Selecciona una estrella para descubrir un recuerdo guardado en el universo ✨</p>
+
+    <!-- Mapa de Estrellas -->
+    <div class="mapa-constelacion glass">
+        <!-- Líneas CSS de unión opcionales entre estrellas -->
+        <svg class="lineas-conexion">
+            <line x1="20%" y1="30%" x2="50%" y2="20%" />
+            <line x1="50%" y1="20%" x2="80%" y2="40%" />
+            <line x1="50%" y1="20%" x2="35%" y2="70%" />
+            <line x1="35%" y1="70%" x2="70%" y2="75%" />
+        </svg>
+
+        <!-- Estrella 1 -->
+        <div class="nodo-estrella" style="top: 30%; left: 20%;" onclick="abrirVisor('foto5.jpeg', 'El comienzo de todo', 'Aquella primera vez que coincidimos y el tiempo pareció detenerse.')">
+            <div class="icono-estrella">⭐</div>
+            <span>Primera cita</span>
+        </div>
+
+        <!-- Estrella 2 (Principal) -->
+        <div class="nodo-estrella estelar-destacada" style="top: 20%; left: 50%;" onclick="abrirVisor('foto2.jpeg', 'Un día inolvidable', 'Donde nos dimos cuenta de que queríamos caminar juntos en esto.')">
+            <div class="icono-estrella">🌟</div>
+            <span>Nuestro momento</span>
+        </div>
+
+        <!-- Estrella 3 -->
+        <div class="nodo-estrella" style="top: 40%; left: 80%;" onclick="abrirVisor('foto4.jpeg', 'Risas infinitas', 'Por todas esas tardes donde lo único que importaba era hacernos sonreír.')">
+            <div class="icono-estrella">⭐</div>
+            <span>Aventuras</span>
+        </div>
+
+        <!-- Estrella 4 -->
+        <div class="nodo-estrella" style="top: 70%; left: 35%;" onclick="abrirVisor('foto3.jpeg', 'Bajo las estrellas', 'Cualquier lugar es mágico si es a tu lado.')">
+            <div class="icono-estrella">✨</div>
+            <span>Detalles</span>
+        </div>
+
+        <!-- Estrella 5 -->
+        <div class="nodo-estrella" style="top: 75%; left: 70%;" onclick="abrirVisor('foto.jpeg', 'El regalo de tenerte', 'Gracias por ser mi lugar seguro en el universo.')">
+            <div class="icono-estrella">⭐</div>
+            <span>Siempre</span>
+        </div>
+    </div>
+</section>
+
+<!-- MODAL / VISOR DE FOTO (LIGHTBOX) -->
+<div id="visorEstelar" class="visor-modal" onclick="cerrarVisor(event)">
+    <div class="visor-contenido glass glow">
+        <button class="btn-cerrar-visor" onclick="cerrarVisorDirecto()">&times;</button>
+        <div class="marco-visor">
+            <img id="visorImg" src="" alt="Recuerdo Estelar">
+        </div>
+        <h3 id="visorTitulo" class="titulo-script"></h3>
+        <p id="visorTexto"></p>
+    </div>
+</div>
+
+    <!-- PANTALLA FINAL -->
+    <section class="final revelable">
+        <h1 class="titulo-script gran-final">Te elegiría a ti mil veces ❤️</h1>
+        <p class="texto-final">
+            No sé qué sorpresas nos depare el destino, pero de algo estoy completamente seguro: 
+            eres y serás siempre la casualidad más hermosa que me ha pasado en la vida.
+        </p>
+        <div class="firma">
+            
+            <h2 class="titulo-script">Con todo el amor por y para siempre tu novio Abraham ❤️</h2>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>

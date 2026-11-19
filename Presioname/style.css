@@ -1,0 +1,740 @@
+/* ==========================================
+   1. VARIABLES & SETUP GENERAL
+========================================== */
+:root {
+    --primary-color: #ff65a3;
+    --secondary-color: #7c4dff;
+    --accent-color: #ffccd5;
+    --bg-dark: #03000a;
+    --font-romantic: 'Great Vibes', cursive;
+    --font-sans: 'Montserrat', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* SNAP SCROLL: Transición limpia por pantallas */
+html {
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+}
+
+body {
+    background: var(--bg-dark);
+    color: #ffffff;
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+    position: relative;
+}
+
+#espacio {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* ==========================================
+   2. EFECTOS & ESTILOS COMUNES
+========================================== */
+.glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glow {
+    box-shadow: 0 0 35px rgba(255, 101, 163, 0.25);
+}
+
+.titulo-script {
+    font-family: var(--font-romantic);
+    color: var(--accent-color);
+    text-shadow: 0 0 20px rgba(255, 101, 163, 0.6);
+    font-weight: 400;
+}
+
+/* ==========================================
+   3. UNIVERSO Y NEBULOSAS
+========================================== */
+.universo {
+    position: fixed;
+    inset: 0;
+    z-index: -10;
+    background: radial-gradient(circle at center, #1a082e 0%, #080014 60%, #000000 100%);
+    overflow: hidden;
+}
+
+.nebulosa {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.45;
+    pointer-events: none;
+}
+
+.n1 {
+    width: 600px;
+    height: 600px;
+    top: -100px;
+    left: -100px;
+    background: radial-gradient(circle, #b55dff, transparent 70%);
+    animation: flotarNebulosa 20s ease-in-out infinite alternate;
+}
+
+.n2 {
+    width: 700px;
+    height: 700px;
+    bottom: -150px;
+    right: -100px;
+    background: radial-gradient(circle, #ff4f9a, transparent 70%);
+    animation: flotarNebulosa 25s ease-in-out infinite alternate-reverse;
+}
+
+.n3 {
+    width: 500px;
+    height: 500px;
+    top: 40%;
+    left: 30%;
+    background: radial-gradient(circle, #4d8dff, transparent 70%);
+    animation: flotarNebulosa 18s ease-in-out infinite alternate;
+}
+
+@keyframes flotarNebulosa {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(80px, 60px) scale(1.2); }
+}
+
+.estrellas {
+    position: absolute;
+    inset: 0;
+}
+
+.estrella {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    animation: titileo var(--duracion, 3s) infinite ease-in-out;
+}
+
+@keyframes titileo {
+    0%, 100% { opacity: 0.2; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.4); box-shadow: 0 0 10px #fff; }
+}
+
+.fugaz {
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(-45deg, #fff, rgba(255, 255, 255, 0));
+    filter: drop-shadow(0 0 6px #fff);
+    animation: animacionFugaz 1.5s ease-in-out forwards;
+}
+
+@keyframes animacionFugaz {
+    0% { transform: translateX(0) translateY(0) rotate(-45deg); width: 0px; opacity: 1; }
+    50% { width: 120px; }
+    100% { transform: translateX(-400px) translateY(400px) rotate(-45deg); width: 0px; opacity: 0; }
+}
+
+/* ==========================================
+   4. BOTÓN MÚSICA
+========================================== */
+.btn-musica {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.3);
+    background: rgba(0,0,0,0.5);
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    backdrop-filter: blur(5px);
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.btn-musica:hover {
+    transform: scale(1.1);
+    background: var(--primary-color);
+}
+
+/* ==========================================
+   5. ESTRUCTURA DE PANTALLAS (PÁGINA COMPLETA)
+========================================== */
+.inicio, 
+.seccion, 
+.seccion-reloj, 
+.foto-seccion, 
+.recuerdos, 
+.final {
+    min-height: 100vh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    text-align: center;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.contenido {
+    max-width: 650px;
+    padding: 40px 30px;
+    border-radius: 30px;
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.contenido.desaparecer {
+    opacity: 0;
+    transform: scale(0.8) translateY(-50px);
+    pointer-events: none;
+}
+
+.contenido h1 {
+    font-size: clamp(2.8rem, 7vw, 5rem);
+    margin-bottom: 10px;
+}
+
+.subtitulo {
+    font-size: 1.2rem;
+    opacity: 0.85;
+    margin-bottom: 8px;
+    font-weight: 300;
+}
+
+.frase {
+    font-size: 1.5rem;
+    color: var(--accent-color);
+}
+
+.btn-principal {
+    margin-top: 30px;
+    padding: 16px 40px;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 0 25px rgba(255, 101, 163, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-principal:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 35px rgba(255, 101, 163, 0.8);
+}
+
+/* ==========================================
+   6. SOBRE 3D Y CARTA (MODAL FLOTANTE ADAPTABLE)
+========================================== */
+.envelope-wrapper {
+    perspective: 1000px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.envelope {
+    position: relative;
+    width: 320px;
+    height: 200px;
+    background: rgba(35, 15, 45, 0.85);
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 101, 163, 0.35);
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.envelope:hover {
+    transform: translateY(-5px) scale(1.02);
+}
+
+.flap {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    pointer-events: none;
+}
+
+.top-flap {
+    top: 0;
+    left: 0;
+    border-width: 115px 160px 0 160px;
+    border-color: #ff65a3 transparent transparent transparent;
+    transform-origin: top;
+    transition: transform 0.6s ease 0.1s, z-index 0.2s ease 0.3s;
+    z-index: 5;
+}
+
+.bottom-flap {
+    bottom: 0;
+    left: 0;
+    border-width: 0 160px 105px 160px;
+    border-color: transparent transparent #e0528e transparent;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    z-index: 4;
+}
+
+.left-flap {
+    top: 0;
+    left: 0;
+    border-width: 100px 0 100px 160px;
+    border-color: transparent transparent transparent #b04378;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    z-index: 3;
+}
+
+.right-flap {
+    top: 0;
+    right: 0;
+    border-width: 100px 160px 100px 0;
+    border-color: transparent #b04378 transparent transparent;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    z-index: 3;
+}
+
+.heart-seal {
+    position: absolute;
+    top: 90px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    z-index: 6;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.envelope.open .top-flap {
+    transform: rotateX(180deg);
+    z-index: 1;
+}
+
+.envelope.open .heart-seal {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.5);
+}
+
+/* CARTA COMO TARJETA MODAL CENTRADA */
+.letter {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -40%) scale(0.8);
+    width: 90vw;
+    max-width: 520px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 40px 30px;
+    border-radius: 24px;
+    text-align: center;
+    background: rgba(15, 6, 25, 0.95) !important;
+    border: 1.5px solid rgba(255, 183, 220, 0.4);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(255, 101, 163, 0.35);
+    backdrop-filter: blur(15px);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 1000;
+}
+
+.letter.mostrar {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.letter::-webkit-scrollbar {
+    width: 6px;
+}
+.letter::-webkit-scrollbar-thumb {
+    background: rgba(255, 101, 163, 0.5);
+    border-radius: 10px;
+}
+
+.letter h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #ffb7dc;
+}
+
+.letter p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    margin-bottom: 15px;
+    color: #ffffff;
+    font-weight: 300;
+}
+
+.btn-cerrar-carta {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.btn-cerrar-carta:hover {
+    color: #ff65a3;
+}
+
+/* ==========================================
+   7. CONTADOR DE TIEMPO
+========================================== */
+.seccion-reloj h2 {
+    font-size: 3rem;
+    margin-bottom: 5px;
+}
+
+.sub-texto {
+    font-size: 1.1rem;
+    opacity: 0.7;
+    margin-bottom: 30px;
+}
+
+.contador-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 25px;
+    border-radius: 25px;
+    flex-wrap: wrap;
+}
+
+.caja-tiempo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 80px;
+}
+
+.caja-tiempo span {
+    font-size: 2.3rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    text-shadow: 0 0 10px rgba(255, 101, 163, 0.5);
+}
+
+.caja-tiempo small {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.8;
+    margin-top: 5px;
+}
+
+/* ==========================================
+   8. FOTO DE RECUERDO
+========================================== */
+.marco-foto {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    margin: 0 auto 25px;
+    border-radius: 50%;
+    padding: 6px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    box-shadow: 0 0 40px rgba(255, 101, 163, 0.5);
+    animation: flotarFoto 6s ease-in-out infinite alternate;
+}
+
+.marco-foto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+@keyframes flotarFoto {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-12px); }
+}
+
+.frase-destacada {
+    font-size: 1.3rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--accent-color);
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+/* ==========================================
+   9. TARJETAS DE RECUERDOS
+========================================== */
+.recuerdos h2 {
+    font-size: 3rem;
+    margin-bottom: 30px;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.card {
+    flex: 1 1 250px;
+    max-width: 280px;
+    padding: 25px 20px;
+    border-radius: 20px;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: var(--primary-color);
+}
+
+.card .icon {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+}
+
+.card h3 {
+    color: var(--accent-color);
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.card p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    opacity: 0.8;
+}
+
+/* ==========================================
+   10. FINAL Y UTILIDADES
+========================================== */
+.gran-final {
+    font-size: clamp(2.8rem, 6vw, 4rem);
+    margin-bottom: 15px;
+}
+
+.texto-final {
+    max-width: 550px;
+    margin: 0 auto 30px;
+    font-size: 1.15rem;
+    line-height: 1.7;
+    opacity: 0.9;
+    font-weight: 300;
+}
+
+.firma h2 {
+    font-size: 2.8rem;
+    margin-top: 10px;
+}
+
+.corazon-click {
+    position: absolute;
+    font-size: 24px;
+    pointer-events: none;
+    animation: animacionCorazon 1.2s ease-out forwards;
+    z-index: 999;
+}
+
+@keyframes animacionCorazon {
+    0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
+    100% { transform: translate(-50%, -120px) scale(1.5); opacity: 0; }
+}
+
+.revelable {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.revelable.activo {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.oculto { 
+    display: none !important; 
+}
+/* ==========================================
+   GALERÍA PLANETARIO / CONSTELACIÓN
+========================================== */
+.galeria-estelar {
+    width: 100%;
+}
+
+.mapa-constelacion {
+    position: relative;
+    width: 90%;
+    max-width: 750px;
+    height: 420px;
+    margin: 20px auto 0;
+    border-radius: 30px;
+    overflow: hidden;
+    background: rgba(10, 3, 22, 0.6);
+}
+
+/* Líneas que unen las estrellas */
+.lineas-conexion {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.lineas-conexion line {
+    stroke: rgba(255, 101, 163, 0.25);
+    stroke-width: 1.5;
+    stroke-dasharray: 4;
+    animation: brilloLinea 3s infinite linear;
+}
+
+/* Nodos interactivos de estrellas */
+.nodo-estrella {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    z-index: 2;
+    transition: transform 0.3s ease;
+}
+
+.nodo-estrella:hover {
+    transform: translate(-50%, -50%) scale(1.3);
+}
+
+.icono-estrella {
+    font-size: 1.8rem;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+    animation: pulsoEstrella 2.5s ease-in-out infinite alternate;
+}
+
+.estelar-destacada .icono-estrella {
+    font-size: 2.4rem;
+    filter: drop-shadow(0 0 15px rgba(255, 101, 163, 0.9));
+}
+
+.nodo-estrella span {
+    font-size: 0.75rem;
+    color: var(--accent-color);
+    margin-top: 4px;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    opacity: 0.85;
+    text-shadow: 0 0 5px #000;
+}
+
+@keyframes pulsoEstrella {
+    0% { transform: scale(0.9); opacity: 0.7; }
+    100% { transform: scale(1.15); opacity: 1; filter: drop-shadow(0 0 15px var(--primary-color)); }
+}
+
+/* ==========================================
+   MODAL / VISOR POP-UP
+========================================== */
+.visor-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(12px);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    padding: 20px;
+}
+
+.visor-modal.activo {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.visor-contenido {
+    position: relative;
+    max-width: 450px;
+    width: 100%;
+    padding: 30px 25px;
+    border-radius: 25px;
+    text-align: center;
+    background: rgba(20, 8, 32, 0.95) !important;
+    transform: scale(0.7);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.visor-modal.activo .visor-contenido {
+    transform: scale(1);
+}
+
+.btn-cerrar-visor {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+.marco-visor {
+    width: 100%;
+    max-height: 280px;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.marco-visor img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#visorTitulo {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+}
+
+#visorTexto {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    opacity: 0.9;
+    font-weight: 300;
+}
